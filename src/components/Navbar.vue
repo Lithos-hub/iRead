@@ -34,7 +34,7 @@
 
     <v-navigation-drawer v-model="drawer" temporary app>
       <router-link to="/changelog" style="text-decoration: none;">
-        <v-btn color="orange" class="white--text" block>Changelog</v-btn>
+        <v-btn color="secondary" tile class="cyan--text" block>Changelog</v-btn>
       </router-link>
       <v-list class="nav-list" dense>
         <v-list-item-title class="text-h6 ml-5 text--disabled"
@@ -97,13 +97,14 @@ export default {
     ],
     collections: [
       { to: "/mybooks", icon: "mdi-book", text: "My Books" },
-      { to: "/wishlist", icon: "mdi-star", text: "Wish List" },
+      { to: "/wishlist", icon: "mdi-format-list-bulleted-square", text: "Wish List" },
+      { to: "/read", icon: "mdi-check", text: "Read" },
     ],
     discover: [
       { to: "/main", icon: "mdi-home", text: "Main" },
       { to: "/genres", icon: "mdi-table", text: "By Genres" },
-      { to: "/newreleases", icon: "mdi-star", text: "New releases" },
-      { to: "/top100", icon: "mdi-star", text: "Top 100" },
+      { to: "/newreleases", icon: "mdi-alert-box", text: "New releases" },
+      { to: "/bestsellers", icon: "mdi-star", text: "Best Sellers" },
     ],
   }),
 };

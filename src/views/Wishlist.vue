@@ -10,17 +10,15 @@
       This list is empty. You can add books searching in the Main section.
     </h2>
 
-    <v-sheet height="100%" width="100%" class="pa-5 black--text" elevation="10" v-if="storagedBooks.length > 0">
-      <v-card color="primary white--text">
-        <v-row class="font-weight-bold text-center">
-          <v-col>Cover</v-col>
-          <v-col>Title</v-col>
-          <v-col>Author/s</v-col>
-          <v-col>Published Year</v-col>
-          <v-col>Language</v-col>
-          <v-col>Actions</v-col>
-        </v-row>
-      </v-card>
+    <v-sheet width="100%" height="100%" elevation="10" class="pa-5" rounded color="white">
+    <v-row no-gutters class="text-center pa-2 secondary cyan--text">
+        <v-col>Cover image</v-col>
+        <v-col>Title</v-col>
+        <v-col>Author</v-col>
+        <v-col>Published year</v-col>
+        <v-col>Language</v-col>
+        <v-col>Actions</v-col>
+    </v-row>
 
       <v-row
         v-for="(item, i) in storagedBooks"
@@ -120,9 +118,24 @@
           ></v-img>
         </v-col>
         <v-col class="ma-auto">
-          <v-btn color="green" :disabled="disabled" block class="my-2">Read (soon)</v-btn>
-          <v-btn color="orange" :disabled="disabled" block class="my-2">Buy (soon)</v-btn>
-          <v-btn color="red" dark block outlined class="my-2" @click="removeBook(item)"
+            <a :href="item.accessInfo.webReaderLink">
+            <v-btn color="blue-grey darken-1"
+            elevation="10"
+            class="my-2 d-block mx-auto cyan--text"
+            width="100%">Read</v-btn>
+            </a>
+            <a :href="item.volumeInfo.infoLink">
+            <v-btn color="blue-grey darken-2"
+            elevation="10"
+            class="my-2 d-block mx-auto cyan--text"
+            width="100%">Buy</v-btn>
+            </a>
+           <v-btn
+            color="blue-grey darken-4"
+            elevation="10"
+            class="my-2 d-block mx-auto cyan--text"
+            width="100%"
+            @click="removeBook(item)"
             >Remove</v-btn
           >
         </v-col>
@@ -150,23 +163,22 @@ export default {
   methods: {
     ...mapActions(["goApp"]),
     removeBook(item) {
-      const myBooks_array = this.storagedBooks;
+      this.storagedBooks = JSON.parse(localStorage.getItem("storageWishList"));
 
-      const index = myBooks_array.indexOf(item);
+      const index = this.storagedBooks.indexOf(item);
 
-      if (index > -1) {
-        myBooks_array.splice(index, 1);
-      }
+      this.storagedBooks.splice(0, 1);
+      localStorage.setItem("storageWishList", JSON.stringify(this.storagedBooks));
+
+      console.log(index);
+      console.log(this.storagedBooks);
     },
     getWishList() {
-      if (localStorage.getItem("myWishedBooks")) {
-        this.storagedBooks = JSON.parse(localStorage.getItem("myWishedBooks"));
+      if (localStorage.getItem("storageWishList")) {
+        this.storagedBooks = JSON.parse(localStorage.getItem("storageWishList"));
       }
       console.log(this.storagedBooks);
     },
-  },
-  computed: {
-    ...mapState(["wishList"]),
   },
   created() {
     this.goApp();

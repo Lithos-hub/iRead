@@ -36,6 +36,10 @@ export default {
   font-family: $style7;
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
   margin-top: 20px;
 }

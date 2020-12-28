@@ -10,8 +10,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     enteredApp: false,
-    myBooks: [],
-    wishList: [],
     myUser: {},
     loggedUser: false,
   },

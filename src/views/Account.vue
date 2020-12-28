@@ -3,22 +3,22 @@
 
         <SectionTitle :title="sectionTitle"/>
 
-      <v-divider></v-divider>
+    
 
       <v-list>
           <v-list-item>
               <v-list-item-title class="list-summary">
-                  Saved books (My Books): {{savedbooks1}}
+                  Saved books (My Books): {{myBooks.length}}
               </v-list-item-title>
           </v-list-item>
           <v-list-item>
               <v-list-item-title class="list-summary">
-                  Saved books (Wish list): {{savedbooks2}}
+                  Saved books (Wish list): {{wishList.length}}
               </v-list-item-title>
           </v-list-item>
           <v-list-item>
               <v-list-item-title class="list-summary">
-                  Read books: {{readbooks}}
+                  Read books: {{readbooks.length}}
               </v-list-item-title>
           </v-list-item>
           <v-divider></v-divider>
@@ -50,9 +50,9 @@ export default {
     name: "Account",
     data() {
         return {
-            savedbooks1: 0,
-            savedbooks2: 0,
-            readbooks: 0,
+            myBooks: [],
+            wishList: [],
+            readbooks: [],
             sectionTitle: "Account summary",
         }
     },
@@ -60,11 +60,27 @@ export default {
         SectionTitle
     },
     methods: {
-        ...mapActions(["goApp"])
+        ...mapActions(["goApp"]),
+    getBookData() {
+         if (localStorage.getItem("storageWishList")) {
+        this.wishList = JSON.parse(localStorage.getItem("storageWishList"));
+            }
 
+         if (localStorage.getItem("storageMyBooks")) {
+        this.myBooks = JSON.parse(localStorage.getItem("storageMyBooks"));
+            }
+        if(localStorage.getItem("storageReadBooks")) {
+            this.readbooks.push(JSON.parse(localStorage.getItem("storageReadBooks")));
+        }
+   
+     
+    }
     },
      created() {
         this.goApp();
+    },
+    mounted() {
+        this.getBookData();
     }
 }
 </script>

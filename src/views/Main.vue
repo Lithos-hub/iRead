@@ -23,8 +23,8 @@
       <span id="h">h</span>
     </h1>
     <v-row>
-      <v-col></v-col>
-      <v-col>
+      <v-col lg="2" md="3"></v-col>
+      <v-col lg="8" md="6">
         <form @submit.prevent="searchBook(searchInput)">
           <v-text-field
             outlined
@@ -50,24 +50,28 @@
           </p>
         </div>
       </v-col>
-      <v-col></v-col>
+      <v-col lg="2" md="3"></v-col>
     </v-row>
 
     <v-divider></v-divider>
 
     <v-container v-if="results">
-      <h3 class="orange pa-2 rounded white--text text-center">Results</h3>
-      <v-sheet height="100%" width="100%" class="pa-5 black--text" elevation="10">
-        <v-card color="primary white--text">
-          <v-row class="font-weight-bold text-center">
-            <v-col>Cover</v-col>
-            <v-col>Title</v-col>
-            <v-col>Author/s</v-col>
-            <v-col>Published Year</v-col>
-            <v-col>Language</v-col>
-            <v-col>Actions</v-col>
-          </v-row>
-        </v-card>
+      
+      <v-sheet width="100%" height="100%" elevation="10" class="pa-5" rounded color="white">
+
+            
+            <v-row no-gutters class="text-center pa-2 secondary cyan--text rounded">
+                <v-col>Cover image</v-col>
+                <v-col>Title</v-col>
+                <v-col>Author</v-col>
+                <v-col>Published Year</v-col>
+                <v-col>Language</v-col>
+                <v-col>Actions</v-col>
+            </v-row>
+            
+    
+    
+ 
 
         <v-row
           v-for="(item, i) in itemsData"
@@ -167,27 +171,34 @@
             ></v-img>
           </v-col>
           <v-col class="ma-auto">
-            <v-btn color="green" :disabled="disabled" block class="my-2"
-              >Read (soon)</v-btn
-            >
-            <v-btn color="orange" :disabled="disabled" block class="my-2"
-              >Buy (soon)</v-btn
-            >
+           <a :href="item.accessInfo.webReaderLink">
+            <v-btn color="blue-grey darken-1"
+            elevation="10"
+            class="my-2 d-block mx-auto cyan--text"
+            width="100%">Read</v-btn>
+            </a>
+            <a :href="item.volumeInfo.infoLink">
+            <v-btn color="blue-grey darken-2"
+            elevation="10"
+            class="my-2 d-block mx-auto cyan--text"
+            width="100%">Buy</v-btn>
+            </a>
             <v-btn
-              block
-              small
-              class="my-2"
+              color="blue-grey darken-3"
+            elevation="10"
+            class="my-2 d-block mx-auto cyan--text"
+            width="100%"
               @click="addToWishList(item)"
               :disabled="wishSelected.includes(item) ? disabled : noDisabled"
               >Add to wish list
             </v-btn>
             <v-btn
-              block
-              small
-              color="purple"
-              class="my-2 white--text"
+              color="blue-grey darken-4"
+            elevation="10"
+            class="my-2 d-block mx-auto cyan--text"
+            width="100%"
               @click="addToMyBooks(item)"
-              :disabled="mySelectedBook.includes(item) ? disabled : noDisabled"
+              :disabled="mybooksSelected.includes(item) ? disabled : noDisabled"
               >Add to my books
             </v-btn>
           </v-col>
@@ -212,15 +223,15 @@ export default {
       errorMessage: false,
       results: false,
       itemsData: [],
-      wishSelected: [],
-      mySelectedBook: [],
       loader: false,
+      wishSelected: [],
+      mybooksSelected: [],
       addedToMyBooks: false,
       coverNotExists: require("../assets/img/error-img.jpg"),
     };
   },
   computed: {
-    ...mapState(["enteredApp", "myBooks"]),
+    ...mapState(["enteredApp"]),
   },
   methods: {
     ...mapActions(["goApp"]),
@@ -257,23 +268,19 @@ export default {
     addToMyBooks(item) {
       console.log(item);
       this.snackbar = true;
-      this.$store.state.myBooks.push(item);
-      this.mySelectedBook.push(item);
-
-      const storage = JSON.parse(localStorage.getItem("mySelectedBooks")) || [];
+      this.mybooksSelected.push(item);
+      const storage = JSON.parse(localStorage.getItem("storageMyBooks")) || [];
       storage.push(item);
 
-      localStorage.setItem("mySelectedBooks", JSON.stringify(storage));
+      localStorage.setItem("storageMyBooks", JSON.stringify(storage));
     },
     addToWishList(item) {
       this.snackbar = true;
-      this.$store.state.wishList.push(item);
       this.wishSelected.push(item);
-
-      const storage = JSON.parse(localStorage.getItem("myWishedBooks")) || [];
+      const storage = JSON.parse(localStorage.getItem("storageWishList")) || [];
       storage.push(item);
 
-      localStorage.setItem("myWishedBooks", JSON.stringify(storage));
+      localStorage.setItem("storageWishList", JSON.stringify(storage));
     },
   },
   created() {

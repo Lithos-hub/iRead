@@ -21,7 +21,7 @@
           </v-tab>
           <v-tab
             active-class="cyan black--text"
-            v-on:click="genre = 'romance'"
+            v-on:click="genre = 'love'"
             @click="getBooks()"
           >
             romance
@@ -107,10 +107,6 @@
       </template>
     </v-toolbar>
 
-  
-
-
-
 
     <v-row class="text-center secondary cyan--text table-header">
 
@@ -120,11 +116,7 @@
         <v-col>Year</v-col>
         <v-col>Actions</v-col>
 
-
     </v-row>
- 
-
- 
 
     <v-card tile color="blue-grey lighten-5" v-if="books.length > 0">
       <v-card-text>
@@ -171,25 +163,36 @@
           </v-col>
          
           <v-col class="ma-auto">
-            <v-btn color="green" dark block class="my-2">Read</v-btn>
-            <v-btn color="orange" dark block class="my-2">Buy</v-btn>
-            <!-- <v-btn
-                  block
-                  small
-                  class="my-2"
-                  @click="addToWishList(item)"
-                  :disabled="wishSelected.includes(item) ? disabled : noDisabled"
-                  >Add to wish list
-                </v-btn>
-                <v-btn
-                  block
-                  small
-                  color="purple"
-                  class="my-2 white--text"
-                  @click="addToMyBooks(item)"
-                  :disabled="mySelectedBook.includes(item) ? disabled : noDisabled"
-                  >Add to my books
-                </v-btn> -->
+          <a :href="item.accessInfo.webReaderLink">
+            <v-btn color="blue-grey darken-1"
+            elevation="10"
+            class="my-2 d-block mx-auto cyan--text"
+            width="100%">Read</v-btn>
+            </a>
+            <a :href="item.volumeInfo.infoLink">
+            <v-btn color="blue-grey darken-2"
+            elevation="10"
+            class="my-2 d-block mx-auto cyan--text"
+            width="100%">Buy</v-btn>
+            </a>
+            <v-btn
+              color="blue-grey darken-3"
+            elevation="10"
+            class="my-2 d-block mx-auto cyan--text"
+            width="100%"
+              @click="addToWishList(item)"
+              :disabled="wishSelected.includes(item) ? disabled : noDisabled"
+              >Add to wish list
+            </v-btn>
+            <v-btn
+              color="blue-grey darken-4"
+            elevation="10"
+            class="my-2 d-block mx-auto cyan--text"
+            width="100%"
+              @click="addToMyBooks(item)"
+              :disabled="mybooksSelected.includes(item) ? disabled : noDisabled"
+              >Add to my books
+            </v-btn>
           </v-col>
         </v-row>
       </v-card-text>
@@ -205,11 +208,15 @@ import SectionTitle from "../components/SectionTitle";
 export default {
   data() {
     return {
+      disabled: true,
+      noDisabled: false,
       fictiontab: null,
       coverNotExists: require("../assets/img/error-img.jpg"),
       books: [],
       genre: "fiction",
-      sectionTitle: "Newest books by genre"
+      sectionTitle: "Newest books by genre",
+      wishSelected: [],
+      mybooksSelected: [],
     };
   },
   components: {
@@ -243,6 +250,23 @@ export default {
           }
         });
     },
+      addToMyBooks(item) {
+      console.log(item);
+      this.snackbar = true;
+      this.mybooksSelected.push(item);
+      const storage = JSON.parse(localStorage.getItem("storageMyBooks")) || [];
+      storage.push(item);
+
+      localStorage.setItem("storageMyBooks", JSON.stringify(storage));
+    },
+    addToWishList(item) {
+      this.snackbar = true;
+      this.wishSelected.push(item);
+      const storage = JSON.parse(localStorage.getItem("storageWishList")) || [];
+      storage.push(item);
+
+      localStorage.setItem("storageWishList", JSON.stringify(storage));
+    },
   },
   created() {
     this.goApp();
@@ -266,5 +290,9 @@ export default {
 .table-header {
   width: 100%;
   margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
 }
 </style>

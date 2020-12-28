@@ -1,6 +1,6 @@
 <template>
   <div class="section-header">
-      <h1 class="section-title secondary">{{title}}</h1>
+      <h1 class="section-title">{{title}}</h1>
 
   </div>
 </template>
@@ -16,14 +16,16 @@ export default {
 @import 'src/scss/variables';
 
 .section-title {
+  position: relative;
+  top: 0px;
+  width: 100%;
   font-family: $style4;
   text-align: center;
-  color: cyan;
-  padding: 5px;
-  padding-left: 15px;
-  border-radius: 15px;
+  color: $googleBlue;
+  padding-left: 25px;
   font-size: 2em;
   letter-spacing: 15px;
+  border-bottom: 2px solid $googleBlue;
 }
 
 

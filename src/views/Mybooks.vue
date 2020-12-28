@@ -55,12 +55,12 @@
           </v-card>
 
           <v-card color="grey darken-4" class="white--text pa-5" elevation="10"
-            >Available on: (disabled for now)<br />
-            <v-btn small color="error" class="badge-book">EBOOK</v-btn>
-            <v-btn small color="orange" class="white--text badge-book">FREE-EBOOK</v-btn>
-            <v-btn small color="blue" class="white--text badge-book">FULL</v-btn>
-            <v-btn small color="green" class="white--text badge-book">PAID-EBOOK</v-btn>
-            <v-btn small color="indigo" class="white--text badge-book">PARTIAL</v-btn>
+            >Available on:<br />
+            <v-btn small color="white" class="badge-book" v-if="item.accessInfo.epub.isAvailable">EPUB</v-btn>
+            <v-btn small color="red" class="white--text badge-book" v-if="item.accessInfo.pdf.isAvailable">PDF</v-btn>
+            <v-btn small color="green" class="white--text badge-book" v-if="item.accessInfo.viewability === 'ALL_PAGES'">FREE-EBOOK</v-btn>
+            <v-btn small color="orange" class="white--text badge-book" v-if="item.accessInfo.viewability === 'PAID-EBOOK'">PAID-EBOOK</v-btn>
+            <v-btn small color="blue" class="white--text badge-book" v-if="item.accessInfo.viewability === 'PARTIAL'">PARTIAL</v-btn>
           </v-card>
         </v-col>
         <v-col lg="3" md="4" class="ma-auto">
@@ -71,20 +71,18 @@
             :disabled="disabled"
             >Share (Soon)</v-btn
           >
-          <v-btn
-            color="blue darken-4"
-            class="my-2 d-block mx-auto white--text"
-            width="100%"
-            :disabled="disabled"
-            >Write a review (Soon)</v-btn
-          >
-          <v-btn
-            color="indigo darken-4"
-            class="my-2 d-block mx-auto white--text"
-            width="100%"
-            :disabled="disabled"
-            >Read (Soon)</v-btn
-          >
+          <a :href="item.accessInfo.webReaderLink">
+            <v-btn color="blue-grey darken-2"
+            elevation="10"
+            class="my-2 d-block mx-auto cyan--text"
+            width="100%">Read</v-btn>
+            </a>
+            <a :href="item.volumeInfo.infoLink">
+            <v-btn color="blue-grey darken-3"
+            elevation="10"
+            class="my-2 d-block mx-auto cyan--text"
+            width="100%">Buy</v-btn>
+            </a>
           <v-btn
             color="blue-grey darken-4"
             elevation="10"
@@ -119,19 +117,19 @@ export default {
   methods: {
     ...mapActions(["goApp"]),
     removeBook(item) {
-      this.storagedBooks = JSON.parse(localStorage.getItem("mySelectedBooks"));
+      this.storagedBooks = JSON.parse(localStorage.getItem("storageMyBooks"));
 
       const index = this.storagedBooks.indexOf(item);
 
       this.storagedBooks.splice(0, 1);
-      localStorage.setItem("mySelectedBooks", JSON.stringify(this.storagedBooks));
+      localStorage.setItem("storageMyBooks", JSON.stringify(this.storagedBooks));
 
       console.log(index);
       console.log(this.storagedBooks);
     },
     getMyBooks() {
-      if (localStorage.getItem("mySelectedBooks")) {
-        this.storagedBooks = JSON.parse(localStorage.getItem("mySelectedBooks"));
+      if (localStorage.getItem("storageMyBooks")) {
+        this.storagedBooks = JSON.parse(localStorage.getItem("storageMyBooks"));
       }
       console.log(this.storagedBooks);
     },
@@ -155,39 +153,36 @@ export default {
   }
 
   .book-img {
-    border-radius: 15px;
+    border-radius: 5px;
     text-align: center;
     margin: 0 auto;
-    border: 2px solid rgba(255, 255, 255, 0.445);
-    box-shadow: 0px 5px 7px black;
+    
+    box-shadow: 0px 5px 10px black;
     margin-bottom: 0px;
   }
 
   .book-title {
-    font-size: 2.5em;
-    text-align: left;
+    
+    font-size: 1.5em;
+    text-align: center;
     font-family: $style6;
-    border-radius: 15px;
-    background-image: linear-gradient(to right, #57123e, rgb(208, 89, 89));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    border-bottom: 2px solid #151515;
-    box-shadow: 0px 5px 8px #57123ec9;
+    border-radius: 0px;
+    color: #303030;
+    border-bottom: 5px solid $googleRed;
     padding: 10px;
   }
 
   .book-author {
-    font-size: 1.5em;
+    font-size: 1em;
     text-align: center;
     font-family: $style7;
     padding: 5px;
     text-shadow: 2px 3px 3px rgba(55, 8, 8, 0.426);
     letter-spacing: 5px;
-    border-radius: 15px 15px 0px 0px !important;
   }
 
   .book-date {
-    font-size: 1.5em;
+    font-size: 1em;
     font-weight: bold;
     text-align: center;
     font-family: $style4;
@@ -201,7 +196,7 @@ export default {
   .badge-book {
     margin: 5px;
     padding: 0px;
-    border-radius: 25px;
+    border-radius: 5px;
   }
 }
 // ******* LAPTOP RESPONSIVE ******* //
@@ -212,25 +207,22 @@ export default {
   }
 
   .book-img {
-    border-radius: 15px;
+    border-radius: 5px;
     text-align: center;
     margin: 0 auto;
-    border: 2px solid rgba(255, 255, 255, 0.445);
-    box-shadow: 0px 5px 7px black;
+    
+    box-shadow: 0px 5px 10px rgb(60, 60, 60);
     margin-bottom: 0px;
-    width: 450px !important;
+    width: 100% !important;
   }
 
   .book-title {
     font-size: 1.5em;
-    text-align: left;
+    text-align: center;
     font-family: $style6;
-    border-radius: 15px;
-    background-image: linear-gradient(to right, #57123e, rgb(208, 89, 89));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    border-bottom: 2px solid #151515;
-    box-shadow: 0px 5px 8px #57123ec9;
+    border-radius: 5px;
+    color: #303030;
+    border-bottom: 5px solid $googleRed;
     padding: 10px;
   }
 
@@ -241,7 +233,7 @@ export default {
     padding: 5px;
     text-shadow: 2px 3px 3px rgba(55, 8, 8, 0.426);
     letter-spacing: 5px;
-    border-radius: 15px 15px 0px 0px !important;
+    border-radius: 5px 5px 0px 0px !important;
   }
 
   .book-date {
@@ -253,13 +245,13 @@ export default {
     letter-spacing: 5px;
     margin-bottom: 10px;
     padding: 5px;
-    border-radius: 0px 0px 15px 15px !important;
+    border-radius: 0px 0px 5px 5px !important;
   }
 
   .badge-book {
     margin: 5px;
     padding: 0px;
-    border-radius: 25px;
+    border-radius: 5px;
   }
 }
 
@@ -271,24 +263,21 @@ export default {
   }
 
   .book-img {
-    border-radius: 15px;
+    border-radius: 5px;
     text-align: center;
     margin: 0 auto;
-    border: 2px solid rgba(255, 255, 255, 0.445);
-    box-shadow: 0px 5px 7px black;
+    
+    box-shadow: 0px 5px 10px black;
     margin-bottom: 0px;
   }
 
   .book-title {
     font-size: 2.5em;
-    text-align: left;
+    text-align: center;
     font-family: $style6;
-    border-radius: 15px;
-    background-image: linear-gradient(to right, #57123e, rgb(208, 89, 89));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    border-bottom: 2px solid #151515;
-    box-shadow: 0px 5px 8px #57123ec9;
+    border-radius: 5px;
+    color: #303030;
+    border-bottom: 5px solid $googleRed;
     padding: 10px;
   }
 
@@ -299,7 +288,7 @@ export default {
     padding: 5px;
     text-shadow: 2px 3px 3px rgba(55, 8, 8, 0.426);
     letter-spacing: 5px;
-    border-radius: 15px 15px 0px 0px !important;
+    border-radius: 5px 5px 0px 0px !important;
   }
 
   .book-date {
@@ -311,7 +300,7 @@ export default {
     letter-spacing: 5px;
     margin-bottom: 10px;
     padding: 5px;
-    border-radius: 0px 0px 15px 15px !important;
+    border-radius: 0px 0px 5px 5px !important;
   }
 
   .badge-book {

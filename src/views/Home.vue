@@ -4,24 +4,31 @@
       <div class="col-lg-1" id="col-left"></div>
       <div class="col-lg-10" id="col-center">
         <div class="container-center">
-          <router-link to="/main" style="text-decoration: none">
             <div id="title" class="text-center pt-5">
+          <router-link to="/main" style="text-decoration: none">
               <v-btn color="secondary" class="go-btn" @click="goApp()">Go</v-btn>
+          </router-link>
               <span id="i">i</span>
               <span id="r">R</span>
               <span id="e">e</span>
               <span id="a">a</span>
               <span id="d">d</span>
             </div>
-          </router-link>
         </div>
       </div>
 
       <div class="col-lg-1" id="col-right"></div>
     </div>
-
+    <v-row>
+      <v-col></v-col>
+      <v-col> <p class="text-center lead mt-10 blue--text" id="using-text">
+          Using Google Books API and The New York Times API
+        </p></v-col>
+      <v-col></v-col>
+    </v-row>
     <v-footer class="transparent text-right" id="footer">
       {{ year }} - Carlos Segura García
+       
     </v-footer>
     <p id="version" class="ma-auto align-content-end">
       Version: {{ version }}.{{ subversion }}
@@ -39,7 +46,7 @@ export default {
     return {
       year: new Date().getFullYear(),
       version: 1,
-      subversion: 1,
+      subversion: 3,
     };
   },
   methods: {
@@ -69,8 +76,7 @@ export default {
   body {
     position: absolute;
   }
-
-  #i {
+ #i {
     position: relative;
     animation: move_i 3s ease-in-out;
     color: $googleBlue;
@@ -96,9 +102,16 @@ export default {
     color: $googleGreen;
   }
 
+  #using-text {
+    position: relative;
+    margin-top: 0px;
+    font-size: 12px;
+  
+  }
+
   .home {
     position: relative;
-    height: 800px;
+    height: 100%;
   }
   .main-container {
     margin: 0;
@@ -111,36 +124,18 @@ export default {
   }
 
   #col-center {
-    height: 900px;
+    height: 100%;
   }
 
   .container-center {
     position: relative;
-    top: 25%;
+    top: 50%;
     left: 0%;
-    transition: 1s;
-
-    &:hover {
-      cursor: pointer;
-
-      #divider-flower {
-        top: 50px;
-      }
-
-      #enter-btn {
-        transition: 0.5s;
-        filter: opacity(1);
-      }
-    }
   }
 
   .go-btn {
     box-shadow: 0px 2px 3px gray;
-    position: absolute;
-    left: 45%;
-    top: 40%;
-    opacity: 0;
-    transition: 3s;
+    position: relative;
     width: 30px !important;
     height: 70px !important;
     background: url("../assets/img/google-wall.jpg");
@@ -150,53 +145,17 @@ export default {
     font-family: $style5 !important;
     font-size: 25px !important;
     font-weight: bold !important;
-    &:hover {
-      transform: scale(1.2);
-      color: white !important;
-    }
   }
 
   #title {
     font-size: 7em;
-    animation: fade 2s ease-in-out;
-    transition: 4s;
-    &:hover {
-      margin-left: 300px;
-      #i {
-        opacity: 0;
-        transition: 3s;
-        color: $googleBlue;
-      }
-      #r {
-        transition: 3s;
-        color: $googleBlue;
-      }
-      #e {
-        transition: 3s;
-
-        color: $googleGreen;
-      }
-      #a {
-        transition: 3s;
-
-        color: $googleRed;
-      }
-      #d {
-        transition: 3s;
-
-        color: $googleYellow;
-      }
-
-      .go-btn {
-        opacity: 1;
-      }
-    }
+    
   }
 
   #version {
-    position: absolute;
+    position: fixed;
     right: 5px;
-    bottom: 0px;
+    bottom: 10px;
     font-size: 16px;
     background: transparent !important;
     color: $googleBlue;
@@ -204,8 +163,9 @@ export default {
   #footer {
     color: $googleGreen;
 
-    position: absolute;
-    bottom: 0px;
+    position: fixed;
+    left: 5px;
+    bottom: 10px;
     font-size: 16px;
     background: transparent !important;
   }
@@ -348,6 +308,14 @@ export default {
     position: relative;
     animation: move_d 4s ease-in-out;
     color: $googleGreen;
+  }
+
+
+    #using-text {
+    position: relative;
+    margin-bottom: 0px;
+    font-size: 10px;
+  
   }
 
   .home {
@@ -605,6 +573,12 @@ export default {
     animation: move_d 4s ease-in-out;
     color: $googleGreen;
   }
+    #using-text {
+    position: relative;
+    margin-bottom: 0px;
+    font-size: 10px;
+  
+  }
 
   .home {
     position: relative;
@@ -621,7 +595,7 @@ export default {
   }
 
   #col-center {
-    height: 900px;
+    height: 100%;
   }
 
   .container-center {
@@ -648,7 +622,7 @@ export default {
     box-shadow: 0px 2px 3px gray;
     position: absolute;
     left: 45%;
-    top: 40%;
+    top: 71%;
     opacity: 0;
     transition: 3s;
     width: 30px !important;

@@ -10,6 +10,19 @@
              <li>Aesthetic changes in general.</li>
              <li>Responsive improvements.</li>
         </ul>
+         <p>Version 1.2</p>
+         <ul>
+             <li>Added the Best Sellers section powered with The New York Times API.</li>
+             <li>Dynamic data in Account Summary section</li>
+       
+        </ul>
+         <p>Version 1.3</p>
+         <ul>
+             <li>Added new features like Read and Buy buttons.</li>
+             <li>Added reactive badges in My Books section about the availability.</li>
+             <li>Added the Read section.</li>
+       
+        </ul>
 
 
           </div>
