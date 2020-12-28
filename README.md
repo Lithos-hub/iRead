@@ -16,7 +16,17 @@ Version 1.1
 * Added the following sections: New releases, Top 100, Account summary (Account), Login / Register (Access).
 * Aesthetic changes in general.
 * Responsive improvements.
-       
+
+Version 1.2
+
+* Added the Best Sellers section powered with The New York Times API.
+* Dynamic data in Account Summary section
+
+Version 1.3 
+         
+* Added new features like Read and Buy buttons.
+* Added reactive badges in My Books section about the availability.
+* Added the Read section.
 
 ## Project setup
 ```
