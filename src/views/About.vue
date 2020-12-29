@@ -58,6 +58,17 @@
         </v-col>
       </v-row>
     </v-sheet>
+      <p class="m-auto mt-5 text-center">Powered with</p>
+    <v-footer>
+      <v-toolbar-title class="d-flex my-auto m-auto mt-5">
+        <a class="navbar-brand" href="#"></a
+        ><v-img src="../assets/img/google-logo.svg" class="ma-auto" width="120" height="100%"></v-img
+        >
+        <span class="ma-auto mx-2" id="and">+</span>
+        <v-img src="../assets/img/nytimes-logo.png" class="ma-auto mx-0" max-width="70" height="100%"></v-img>
+        <span class="api my-auto">APIs</span>
+      </v-toolbar-title>
+    </v-footer>
   </div>
 </template>
 <script>
@@ -101,7 +112,7 @@ export default {
 }
 
 .sheet-text {
-  font-size: 1.3em;
+  font-size: 16px;
   color: white;
   text-align: justify;
   margin: 50px;

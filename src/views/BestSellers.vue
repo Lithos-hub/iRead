@@ -72,15 +72,21 @@ export default {
             })
         },
         addToReadBooks(item) {
-        this.readBooks.push(item);
-        const storage = JSON.parse(localStorage.getItem("storageReadBooks")) || [];
-        storage.push(item);
-        localStorage.setItem("storageReadBooks", JSON.stringify(storage));
-        }
+            this.readBooks.push(item);
+            const storage = JSON.parse(localStorage.getItem("storageReadBooks")) || [];
+            storage.push(item);
+            localStorage.setItem("storageReadBooks", JSON.stringify(storage));
+        },
+        loadReadBooks() {
+            if(localStorage.getItem("storageReadBooks")) {
+            this.readBooks = JSON.parse(localStorage.getItem("storageReadBooks"));
+            }
+        },
     },
-    created() {
+    mounted() {
     this.goApp();
     this.getBestSellers();
+    this.loadReadBooks();
     }
     
 }

@@ -3,41 +3,66 @@
 
         <SectionTitle :title="sectionTitle"/>
 
-    
+    <v-row>
 
+    <v-col>
       <v-list>
+          <p class="green--text">Saved books</p>
           <v-list-item>
               <v-list-item-title class="list-summary">
-                  Saved books (My Books): {{myBooks.length}}
+                  My Books: {{myBooks.length}}
               </v-list-item-title>
           </v-list-item>
           <v-list-item>
               <v-list-item-title class="list-summary">
-                  Saved books (Wish list): {{wishList.length}}
+                  Wish list: {{wishList.length}}
               </v-list-item-title>
           </v-list-item>
           <v-list-item>
               <v-list-item-title class="list-summary">
-                  Read books: {{readbooks.length}}
+                  Read books: {{readbooks.length + readbooksGoogle.length}}
               </v-list-item-title>
           </v-list-item>
           <v-divider></v-divider>
           <v-list-item>
               <v-list-item-title class="list-summary">
-                  Favourite books: <v-btn class="orange darken-2"  dark small>Show info</v-btn>
+                  Favourite books: <v-btn class="orange darken-2" small disabled>Show info</v-btn>
               </v-list-item-title>
           </v-list-item>
           <v-list-item>
               <v-list-item-title class="list-summary">
-                  Favourite authors: <v-btn class="orange darken-2" dark  small>Show info</v-btn>
+                  Favourite authors: <v-btn class="orange darken-2" small disabled>Show info</v-btn>
               </v-list-item-title>
           </v-list-item>
           <v-list-item>
               <v-list-item-title class="list-summary">
-                  Favourite genres: <v-btn class="orange darken-2" dark  small>Show info</v-btn>
+                  Favourite genres: <v-btn class="orange darken-2"  small disabled>Show info</v-btn>
               </v-list-item-title>
           </v-list-item>
       </v-list>
+
+        </v-col>
+
+    <v-col>
+        <v-list>
+            <p class="primary--text">User data</p>
+            <v-list-item>
+                <v-list-item-title class="list-summary">
+                    Username: 
+                </v-list-item-title>
+            </v-list-item>
+            
+            <v-list-item>
+                <v-list-item-title class="list-summary">
+                    Email:
+                </v-list-item-title>
+            </v-list-item>
+
+        </v-list>
+
+
+    </v-col>
+    </v-row>
 
   </v-sheet>
 </template>
@@ -53,6 +78,7 @@ export default {
             myBooks: [],
             wishList: [],
             readbooks: [],
+            readBooksGoogle: [],
             sectionTitle: "Account summary",
         }
     },
@@ -70,7 +96,10 @@ export default {
         this.myBooks = JSON.parse(localStorage.getItem("storageMyBooks"));
             }
         if(localStorage.getItem("storageReadBooks")) {
-            this.readbooks.push(JSON.parse(localStorage.getItem("storageReadBooks")));
+            this.readbooks = JSON.parse(localStorage.getItem("storageReadBooks"));
+        }
+           if(localStorage.getItem("storageReadBooksGoogle")) {
+            this.readbooksGoogle = JSON.parse(localStorage.getItem("storageReadBooksGoogle"));
         }
    
      

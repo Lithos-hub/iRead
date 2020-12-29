@@ -7,11 +7,17 @@
         class="my-auto"
       ></v-app-bar-nav-icon>
 
-      <v-toolbar-title class="d-flex my-auto">
-        <a class="navbar-brand" href="#"></a
-        ><v-img src="../assets/img/google-logo.svg" width="170"></v-img
-        ><span class="api my-auto">API</span>
+    <router-link to="/main">
+
+     <v-toolbar-title class="brand-title"> 
+        <span id="i">i</span>
+        <span id="r">R</span>
+        <span id="e">e</span>
+        <span id="a">a</span>
+        <span id="d">d</span>
       </v-toolbar-title>
+
+    </router-link>
 
       <v-spacer></v-spacer>
       <router-link to="/access" style="text-decoration: none" class="ma-auto mx-2">
@@ -40,8 +46,8 @@
         <v-list-item-title class="text-h6 ml-5 text--disabled"
           >Account</v-list-item-title
         >
-        <v-list-item-group v-model="group" active-class="primary--text text--accent-4">
-          <v-list-item v-for="(item, i) in account" :key="i">
+        <v-list-item-group v-model="group">
+          <v-list-item v-for="(item, i) in account" :key="'A' + i">
             <router-link :to="item.to" style="text-decoration: none" class="router-link">
               <v-list-item-icon>
                 <v-icon class="nav-icon">{{ item.icon }}</v-icon>
@@ -49,12 +55,12 @@
               </v-list-item-icon>
             </router-link>
           </v-list-item>
-        </v-list-item-group>
+        
         <v-list-item-title class="text-h6 ml-5 text--disabled"
           >Discover</v-list-item-title
         >
-        <v-list-item-group v-model="group2" active-class="primary--text text--accent-4">
-          <v-list-item v-for="(item, i) in discover" :key="i">
+    
+          <v-list-item v-for="(item, i) in discover" :key="'B' + i">
             <router-link :to="item.to" style="text-decoration: none" class="router-link">
               <v-list-item-icon>
                 <v-icon class="nav-icon">{{ item.icon }}</v-icon>
@@ -62,13 +68,13 @@
               </v-list-item-icon>
             </router-link>
           </v-list-item>
-        </v-list-item-group>
+      
         <hr class="menu-divider" />
         <v-list-item-title class="text-h6 ml-5 text--disabled"
           >My collections</v-list-item-title
         >
-        <v-list-item-group v-model="group3" active-class="primary--text text--accent-4">
-          <v-list-item v-for="(item, i) in collections" :key="i">
+  
+          <v-list-item v-for="(item, i) in collections" :key="'C' + i">
             <router-link :to="item.to" style="text-decoration: none" class="router-link">
               <v-list-item-icon>
                 <v-icon class="nav-icon">{{ item.icon }}</v-icon>
@@ -90,8 +96,6 @@ export default {
     subversion: 1,
     drawer: false,
     group: null,
-    group2: null,
-    group3: null,
     account: [
       {to: "/account", icon: "mdi-account", text: "My account"},
     ],
@@ -118,11 +122,44 @@ export default {
   padding: 0;
 }
 
+#i {
+    position: relative;
+    color: $googleBlue;
+  }
+  #r {
+    position: relative;
+    color: $googleRed;
+  }
+  #e {
+    position: relative;
+    color: $googleYellow;
+  }
+  #a {
+    position: relative;
+    color: $googleBlue;
+  }
+  #d {
+    position: relative;
+    color: $googleGreen;
+  }
+
+
+.brand-title {
+  font-family: $style5;
+  font-weight: bold;
+}
+
+#and {
+  font-family: $style5;
+  font-weight: bold;
+  color: #505050;
+}
+
 .api {
   color: $googleBlue;
   display: flex;
   margin-left: 10px;
-  font-weight: bold;
+  font-family: $style5;
 }
 
 .nav-list {

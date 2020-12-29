@@ -250,6 +250,32 @@ export default {
           }
         });
     },
+    showFictionBooks() {
+      let genre = "fiction";
+
+      const url = `https://www.googleapis.com/books/v1/volumes?q=subject:${genre}&startIndex=21&maxResults=40&orderBy=newest`;
+      this.results = false;
+      axios
+        .get(url)
+        .then((resp) => {
+          console.log(resp.data.items);
+
+          this.loader = false;
+          this.errorMessage = false;
+          this.results = true;
+          this.books = resp.data.items;
+        })
+        .catch((e) => {
+          if (e.includes("thumbnail")) {
+            this.coverExists = false;
+            e = "Image no available";
+            console.info(e);
+          } else {
+            this.coverNotExists = true;
+            return;
+          }
+        });
+    },
       addToMyBooks(item) {
       console.log(item);
       this.snackbar = true;
@@ -268,8 +294,9 @@ export default {
       localStorage.setItem("storageWishList", JSON.stringify(storage));
     },
   },
-  created() {
+  mounted() {
     this.goApp();
+    this.showFictionBooks();
   },
 };
 </script>

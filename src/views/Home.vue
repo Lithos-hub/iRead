@@ -46,7 +46,7 @@ export default {
     return {
       year: new Date().getFullYear(),
       version: 1,
-      subversion: 3,
+      subversion: 4,
     };
   },
   methods: {

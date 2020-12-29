@@ -24,7 +24,11 @@
        
         </ul>
 
-
+        <p>Version 1.4</p>
+        <ul>
+        <li>Minus aesthetic changes.</li>
+        <li>EPUB/PDF/READ buttons available.</li>
+        </ul>
           </div>
 
 

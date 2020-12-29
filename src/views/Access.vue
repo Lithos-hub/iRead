@@ -1,7 +1,7 @@
 <template>
   <div class="signup">
-    <h1 class="blue--text section-title">Login / Register</h1>
-    <hr>
+        <SectionTitle :title="sectionTitle"/>
+    
       
       <v-row>
         <v-col></v-col>
@@ -15,7 +15,7 @@
                             
                             <div class="pa-5 font-weight-bold text-h5">
                                 
-                                <v-btn large color="red white--text pa-5" @click="google">Sign up with my Google account <v-icon color="white" class="ml-5">mdi-google</v-icon></v-btn>
+                                <v-btn disabled large color="red white--text pa-5" @click="google">Sign up with my Google account <v-icon color="white" class="ml-5">mdi-google</v-icon></v-btn>
                                 
                             </div>
                             
@@ -32,7 +32,7 @@
                             
                             <div class="pa-5 font-weight-bold text-h5">
                                 
-                                <v-btn large color="info white--text">Login with my Google account <v-icon color="white" class="ml-5">mdi-google</v-icon></v-btn>
+                                <v-btn disabled large color="info white--text">Login with my Google account <v-icon color="white" class="ml-5">mdi-google</v-icon></v-btn>
                                 
                             </div>
                             
@@ -53,12 +53,16 @@
 
 <script>
 import {mapActions, mapMutations} from "vuex";
-
+import SectionTitle from "../components/SectionTitle";
 export default {
     data() {
         return {
           bar: true,
+          sectionTitle: "Login / Register"
         }
+    },
+    components: {
+      SectionTitle
     },
     methods: {
     ...mapActions(["goApp", "ewUser"]),

@@ -201,6 +201,12 @@
               :disabled="mybooksSelected.includes(item) ? disabled : noDisabled"
               >Add to my books
             </v-btn>
+              <v-switch
+            inset
+            label="Just read!"
+            @click="addToReadBooks(item)"
+            :disabled="readBooks.includes(item) ? justread : !justread"
+            ></v-switch>
           </v-col>
         </v-row>
       </v-sheet>
@@ -226,6 +232,8 @@ export default {
       loader: false,
       wishSelected: [],
       mybooksSelected: [],
+      readBooks: [],
+      justread: true,
       addedToMyBooks: false,
       coverNotExists: require("../assets/img/error-img.jpg"),
     };
@@ -282,6 +290,12 @@ export default {
 
       localStorage.setItem("storageWishList", JSON.stringify(storage));
     },
+    addToReadBooks(item) {
+      this.readBooks.push(item);
+      const storage = JSON.parse(localStorage.getItem("storageReadBooksGoogle")) || [];
+      storage.push(item);
+      localStorage.setItem("storageReadBooksGoogle", JSON.stringify(storage));
+      }
   },
   created() {
     this.goApp();

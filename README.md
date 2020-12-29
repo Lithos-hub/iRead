@@ -28,6 +28,11 @@ Version 1.3
 * Added reactive badges in My Books section about the availability.
 * Added the Read section.
 
+Version 1.4
+
+* Minus aesthetic changes.
+* EPUB/PDF/READ buttons available.
+
 ## Project setup
 ```
 npm install

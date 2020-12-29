@@ -12,7 +12,7 @@
       </h2>
 
       <v-row v-for="(item, i) in storagedBooks" :key="i" class="text-center mx-auto my-5">
-        <v-col lg="2" md="2" ma-auto>
+        <v-col lg="2" md="2" class="ma-auto">
           <div class="background"></div>
           <v-img
             class="book-img"
@@ -56,11 +56,21 @@
 
           <v-card color="grey darken-4" class="white--text pa-5" elevation="10"
             >Available on:<br />
+            <a :href="item.accessInfo.epub.acsTokenLink">
             <v-btn small color="white" class="badge-book" v-if="item.accessInfo.epub.isAvailable">EPUB</v-btn>
+            </a>
+            <a :href="item.accessInfo.pdf.acsTokenLink">
             <v-btn small color="red" class="white--text badge-book" v-if="item.accessInfo.pdf.isAvailable">PDF</v-btn>
+            </a>
+            <a :href="item.accessInfo.webReaderLink">
             <v-btn small color="green" class="white--text badge-book" v-if="item.accessInfo.viewability === 'ALL_PAGES'">FREE-EBOOK</v-btn>
+            </a>
+            <a :href="item.accessInfo.webReaderLink">
             <v-btn small color="orange" class="white--text badge-book" v-if="item.accessInfo.viewability === 'PAID-EBOOK'">PAID-EBOOK</v-btn>
+            </a>
+            <a :href="item.accessInfo.webReaderLink">
             <v-btn small color="blue" class="white--text badge-book" v-if="item.accessInfo.viewability === 'PARTIAL'">PARTIAL</v-btn>
+            </a>
           </v-card>
         </v-col>
         <v-col lg="3" md="4" class="ma-auto">
@@ -71,12 +81,7 @@
             :disabled="disabled"
             >Share (Soon)</v-btn
           >
-          <a :href="item.accessInfo.webReaderLink">
-            <v-btn color="blue-grey darken-2"
-            elevation="10"
-            class="my-2 d-block mx-auto cyan--text"
-            width="100%">Read</v-btn>
-            </a>
+
             <a :href="item.volumeInfo.infoLink">
             <v-btn color="blue-grey darken-3"
             elevation="10"
