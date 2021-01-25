@@ -116,6 +116,12 @@ export default {
   color: white;
   text-align: justify;
   margin: 50px;
+  font-family: $style4; 
+
+  li {
+    font-family: $style5;
+    margin: 20px;
+  }
 }
 
 .flag {

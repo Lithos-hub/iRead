@@ -4,32 +4,12 @@
 
           <div class="list-group">
          
-         <p>Version 1.1</p>
-         <ul>
-             <li>Added the following sections: New releases, Top 100, Account summary (Account), Login / Register (Access).</li>
-             <li>Aesthetic changes in general.</li>
-             <li>Responsive improvements.</li>
-        </ul>
-         <p>Version 1.2</p>
-         <ul>
-             <li>Added the Best Sellers section powered with The New York Times API.</li>
-             <li>Dynamic data in Account Summary section</li>
-       
-        </ul>
-         <p>Version 1.3</p>
-         <ul>
-             <li>Added new features like Read and Buy buttons.</li>
-             <li>Added reactive badges in My Books section about the availability.</li>
-             <li>Added the Read section.</li>
-       
-        </ul>
-
-        <p>Version 1.4</p>
-        <ul>
-        <li>Minus aesthetic changes.</li>
-        <li>EPUB/PDF/READ buttons available.</li>
+         <ul v-for="(item, i) in changelog" :key="i">
+         <p>{{item.version}}</p>
+             <li v-for="(changes, i) in item.changes" :key="'A' + i">{{changes}}</li>
         </ul>
           </div>
+
 
 
 </v-container>
@@ -41,17 +21,28 @@ import {mapActions} from "vuex";
 export default {
     data() {
         return {
-            sectionTitle: "Changelog"
+            sectionTitle: "Changelog",
+            changelog: [
+                {version: "Version 1.1.0", changes: ["Added the following sections: Best Sellers, My account (Account), Login / Register (Access).", "Aesthetic changes in general.", "Responsive improvements."]},
+                {version: "Version 1.2.0", changes: ["Added the Best Sellers section powered with The New York Times API.", "Dynamic data in the Account Summary section."]},
+                {version: "Version 1.3.0", changes: ["Added new features like Read and Buy buttons.", "Added reactive badges in My Books section about the availability.", "Added the Read section."]},
+                {version: "Version 1.4.0", changes: ["Minus aesthetic changes.", "EPUB/PDF/READ buttons available."]},
+                {version: "Version 1.4.1", changes: ["New logo and favicon."]},
+            ]
         }
     },
     components: {
         SectionTitle
     },
     methods: {
-        ...mapActions(["goApp"])
+        ...mapActions(["goApp"]),
+        showReverse() {
+            this.changelog.reverse();
+        }
     },
     created() {
     this.goApp();
+    this.showReverse();
     }
 }
 </script>

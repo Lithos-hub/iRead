@@ -46,11 +46,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Access.vue')
   },
   {
-    path: '/newreleases',
-    name: 'New releases',
-    component: () => import(/* webpackChunkName: "about" */ '../views/NewReleases.vue')
-  },
-  {
     path: '/bestsellers',
     name: 'Best Sellers',
     component: () => import(/* webpackChunkName: "about" */ '../views/BestSellers.vue')
@@ -61,9 +56,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Changelog.vue')
   },
   {
-    path: '/read',
-    name: 'Read',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Read.vue')
+    path: '/alreadyread',
+    name: 'Already read',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AlreadyRead.vue')
   }
 ]
 

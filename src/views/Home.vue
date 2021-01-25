@@ -31,7 +31,7 @@
        
     </v-footer>
     <p id="version" class="ma-auto align-content-end">
-      Version: {{ version }}.{{ subversion }}
+      Version: {{ major }}.{{ minor }}.{{patch}}
     </p>
   </div>
 </template>
@@ -45,8 +45,9 @@ export default {
   data() {
     return {
       year: new Date().getFullYear(),
-      version: 1,
-      subversion: 4,
+      major: 1,
+      minor: 4,
+      patch: 1
     };
   },
   methods: {

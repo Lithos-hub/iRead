@@ -9,14 +9,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    enteredApp: false,
     myUser: {},
     loggedUser: false,
   },
   mutations: {
-    setEnteredApp(state, payload) {
-      state.enteredApp = payload;
-    },
     setLoggedUser(state, payload) {
       state.loggedUser = payload;
     },
@@ -28,9 +24,6 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    goApp({commit}) {
-      commit("setEnteredApp", true)
-    },
     setUser({commit}, user){
       const myuser = {
         name: user.displayName,

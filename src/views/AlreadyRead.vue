@@ -1,5 +1,5 @@
 <template>
-<div>
+  <v-container fluid>
       <SectionTitle :title="sectionTitle"/>
 
 <v-sheet height="100%" width="100%" class="pa-10 black--text" elevation="10">
@@ -10,7 +10,7 @@
         This list is empty. You can add books in Best Sellers/Main sections.
       </h2>
 
-      <v-row v-for="(item, i) in storagedBooks" :key="'A' + i" class="text-center mx-auto my-5 d-flex">
+      <v-row v-for="(item, i) in storagedBooks" :key="'A' + i" class="text-center mx-auto my-5">
         <div class="container mx-auto text-center">
          <v-chip
           class="ma-2 text-center"
@@ -140,7 +140,7 @@
     </v-sheet>
 
 
-</div>
+  </v-container>
 </template>
 
 <script>
@@ -153,7 +153,7 @@ export default {
       storagedBooks: [],
       storagedBooksGoogle: [],
       disabled: true,
-      sectionTitle: "Read"
+      sectionTitle: "Already read"
     };
   },
   components: {
@@ -169,9 +169,6 @@ export default {
 
       this.storagedBooks.splice(0, 1);
       localStorage.setItem("storageReadBooks", JSON.stringify(this.storagedBooks));
-
-      console.log(index);
-      console.log(this.storagedBooks);
     },
      removeBookGoogle(item) {
       this.storagedBooksGoogle = JSON.parse(localStorage.getItem("storageReadBooksGoogle"));
@@ -180,21 +177,16 @@ export default {
 
       this.storagedBooksGoogle.splice(0, 1);
       localStorage.setItem("storageReadBooksGoogle", JSON.stringify(this.storagedBooksGoogle));
-
-      console.log(index);
-      console.log(this.storagedBooksGoogle);
      },
     getMyBooks() {
       if (localStorage.getItem("storageReadBooks")) {
         this.storagedBooks = JSON.parse(localStorage.getItem("storageReadBooks"));
       }
-      console.log(this.storagedBooks);
     },
     getMyBooksGoogle() {
       if (localStorage.getItem("storageReadBooksGoogle")) {
         this.storagedBooksGoogle = JSON.parse(localStorage.getItem("storageReadBooksGoogle"));
       }
-      console.log(this.storagedBooksGoogle);
     },
   },
   created() {
@@ -208,6 +200,10 @@ export default {
 
 <style lang="scss">
 @import "src/scss/variables";
+
+// COMMON
+
+
 
 // ******* MOBILE RESPONSIVE ******* //
 @media only screen and (min-width: 360px) {

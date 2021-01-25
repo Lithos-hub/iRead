@@ -128,15 +128,12 @@ export default {
 
       this.storagedBooks.splice(0, 1);
       localStorage.setItem("storageMyBooks", JSON.stringify(this.storagedBooks));
-
-      console.log(index);
-      console.log(this.storagedBooks);
     },
     getMyBooks() {
       if (localStorage.getItem("storageMyBooks")) {
         this.storagedBooks = JSON.parse(localStorage.getItem("storageMyBooks"));
       }
-      console.log(this.storagedBooks);
+
     },
   },
   created() {

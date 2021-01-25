@@ -232,8 +232,6 @@ export default {
       axios
         .get(url)
         .then((resp) => {
-          console.log(resp.data.items);
-
           this.loader = false;
           this.errorMessage = false;
           this.results = true;
@@ -258,8 +256,6 @@ export default {
       axios
         .get(url)
         .then((resp) => {
-          console.log(resp.data.items);
-
           this.loader = false;
           this.errorMessage = false;
           this.results = true;

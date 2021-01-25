@@ -20,7 +20,7 @@
           </v-list-item>
           <v-list-item>
               <v-list-item-title class="list-summary">
-                  Read books: {{readbooks.length + readbooksGoogle.length}}
+                  Read books: {{readBooks.length + readBooksGoogle.length}}
               </v-list-item-title>
           </v-list-item>
           <v-divider></v-divider>
@@ -77,7 +77,7 @@ export default {
         return {
             myBooks: [],
             wishList: [],
-            readbooks: [],
+            readBooks: [],
             readBooksGoogle: [],
             sectionTitle: "Account summary",
         }
@@ -90,22 +90,26 @@ export default {
     getBookData() {
          if (localStorage.getItem("storageWishList")) {
         this.wishList = JSON.parse(localStorage.getItem("storageWishList"));
+
             }
 
          if (localStorage.getItem("storageMyBooks")) {
         this.myBooks = JSON.parse(localStorage.getItem("storageMyBooks"));
+
             }
         if(localStorage.getItem("storageReadBooks")) {
-            this.readbooks = JSON.parse(localStorage.getItem("storageReadBooks"));
+        this.readBooks = JSON.parse(localStorage.getItem("storageReadBooks"));
+
         }
            if(localStorage.getItem("storageReadBooksGoogle")) {
-            this.readbooksGoogle = JSON.parse(localStorage.getItem("storageReadBooksGoogle"));
+        this.readBooksGoogle = JSON.parse(localStorage.getItem("storageReadBooksGoogle"));
+
         }
    
      
     }
     },
-     created() {
+    created() {
         this.goApp();
     },
     mounted() {

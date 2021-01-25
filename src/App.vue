@@ -3,7 +3,7 @@
     <v-main>
       <v-container class="container">
         <keep-alive>
-          <Navbar v-if="enteredApp" />
+          <Navbar v-if="this.$route.path != '/'" />
         </keep-alive>
         <router-view> </router-view>
       </v-container>
@@ -13,7 +13,6 @@
 
 <script>
 import Navbar from "./components/Navbar";
-import { mapState, mapActions } from "vuex";
 
 export default {
   name: "App",
@@ -23,9 +22,6 @@ export default {
   },
 
   data: () => ({}),
-  computed: {
-    ...mapState(["enteredApp"]),
-  },
 };
 </script>
 

@@ -104,7 +104,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+
 import SectionTitle from "../components/SectionTitle"
 export default {
   data() {
@@ -120,7 +120,6 @@ export default {
   },
   computed: {},
   methods: {
-    ...mapActions(["goApp"]),
     removeBook(item) {
       this.storagedBooks = JSON.parse(localStorage.getItem("storageWishList"));
 
@@ -128,19 +127,14 @@ export default {
 
       this.storagedBooks.splice(0, 1);
       localStorage.setItem("storageWishList", JSON.stringify(this.storagedBooks));
-
-      console.log(index);
-      console.log(this.storagedBooks);
     },
     getMyBooks() {
       if (localStorage.getItem("storageWishList")) {
         this.storagedBooks = JSON.parse(localStorage.getItem("storageWishList"));
       }
-      console.log(this.storagedBooks);
     },
   },
   created() {
-    this.goApp();
     this.getMyBooks();
   },
   mounted() {},

@@ -102,12 +102,11 @@ export default {
     collections: [
       { to: "/mybooks", icon: "mdi-book", text: "My Books" },
       { to: "/wishlist", icon: "mdi-format-list-bulleted-square", text: "Wish List" },
-      { to: "/read", icon: "mdi-check", text: "Read" },
+      { to: "/alreadyread", icon: "mdi-check", text: "Already Read" },
     ],
     discover: [
       { to: "/main", icon: "mdi-home", text: "Main" },
       { to: "/genres", icon: "mdi-table", text: "By Genres" },
-      { to: "/newreleases", icon: "mdi-alert-box", text: "New releases" },
       { to: "/bestsellers", icon: "mdi-star", text: "Best Sellers" },
     ],
   }),
